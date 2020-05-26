@@ -1,6 +1,10 @@
 // out: ../css/styles.css, sourcemap: false, compress: true
 @import "variables.less";
-@import url( 'https://fonts.googleapis.com/css?family=Roboto:300,500,700');
+@import url('https://rsms.me/inter/inter.css');
+html { font-family: 'Inter', sans-serif; }
+@supports (font-variation-settings: normal) {
+  html { font-family: 'Inter var', sans-serif; }
+}
 
 .transition-all {
   transition: all 0.5s ease;
@@ -16,9 +20,9 @@ html {
 body {
   // padding-top: 54px;
   font-size: 16px;
-  color: @color-text;
+  color: @color--offwhite;
   background-color: #fff;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Inter var', sans-serif;
   font-weight: 300;
   margin: 0;
 }
@@ -26,11 +30,16 @@ body {
 /* Typography ----------------------------------------------------------------- */
 h1 {
   font-weight: 700;
-  font-size: 3rem;
+  font-size: 2rem;
   letter-spacing: 0.5px;
-  color: @color-primary;
+  color: @color--text;
+  margin-top: @spacing-big*2;
+  margin-bottom: @spacing-big;
   @media (min-width: 576px) {
-    font-size: 4rem;
+    font-size: 2.5rem;
+  }
+  @media (min-width: 825px) {
+    font-size: 3rem;
   }
 }
 
@@ -39,22 +48,24 @@ h2, h3 {
 }
 
 h2 {
-  font-size: 3rem;
+  font-size: 1.3rem;
+  border-top: 3px solid @color--text;
+  padding-top: @spacing-small;
 }
 h3 {
   font-size: 1rem;
 }
 
 p {
-  font-size: 1.2rem;
+  font-size: 1rem;
   font-weight: 300;
   line-height: 1.6em;
 }
 
 a {
-  color: @color-text;
+  color: @color--offwhite;
   text-decoration: none;
-  border-bottom: 1px solid @color-text;
+  border-bottom: 1px solid @color--offwhite;
   .transition-all;
   img{
     transform: translate(0, 0);
@@ -62,13 +73,18 @@ a {
   }
   &:hover {
     text-decoration: none;
-    color: @color-secondary;
-    border-bottom: 1px solid @color-secondary;
+    color: @color--secondary;
+    border-bottom: 1px solid @color--secondary;
     img{
       transform: translate(0, -5px);
     }
   }
 }
+
+.color--primary {
+  color: @color--primary;
+}
+
 .nodecoration, .nodecoration:hover {
   border: none;
 }
@@ -92,7 +108,6 @@ a {
 .row {
   width: 100%;
   display: flex;
-  align-items: center;
   justify-content: space-between;
   flex-direction: column;
   @media (min-width: 576px) {
@@ -102,17 +117,34 @@ a {
 .column {
   padding: 0 @spacing-small;
 }
+.col-4 {
+  @media (min-width: 576px) {
+    max-width: 33%;
+  }
+}
+
 
 /* Sections ----------------------------------------------------------------- */
 .section {
   padding: @spacing-def @spacing-small;
 }
 
-.header, .intro {
-  background-color: @color-secondary;
+#header, #intro {
+  background-color: @color--offwhite;
+  padding-bottom: 0;
+  overflow: hidden;
 }
 
-.header .row {
+#intro {
+  align-items: baseline;
+}
+
+#info {
+  padding: @spacing-big*2 @spacing-small;
+  background: @color--text;
+}
+
+#header .row {
   align-items: flex-end;
   flex-direction: row;
   @media (min-width: 576px) {
@@ -120,23 +152,9 @@ a {
   }
 }
 
-.fire {
-  padding: @spacing-big @spacing-small;
-  .row {
-    flex-direction: column-reverse;
-    @media (min-width: 576px) {
-      flex-direction: row;
-    }
-  }
-}
-
-.login {
-  padding: 0 @spacing-small @spacing-big;
-}
-
 .play {
   padding: @spacing-big @spacing-small;
-  background-color: @ligh-gray;
+  background-color: @color--ligh-gray;
   .column {
     text-align: center;
     .apple {
@@ -152,6 +170,11 @@ a {
 
 .footer {
   // padding-top: @spacing-big;
+  background: @color--text;
+  p {
+    font-size: 0.666rem;
+    color: @color--offwhite;
+  }
 }
 
 /* Elements ----------------------------------------------------------------- */
@@ -160,25 +183,16 @@ img {
 }
 
 .intro--img img{
-  box-shadow: 0px @spacing-small @spacing-def fade(@color-text, 15%);
-  margin-bottom: @spacing-def;
-}
-.header img {
-  width: 4rem;
-}
-.fire--img {
-  img{
-    margin: @spacing-def 0;
+  box-shadow: 0px 0px @spacing-def fade(@color--text, 15%);
+  width: 100%;
+  height: auto;
+  transform: translateY(4px);
+  @media (min-width: 576px) {
+  width: 375px;
   }
 }
-.login--img {
-  .big{
-    margin: @spacing-def 0;
-    white-space: nowrap;
-    font-size: 9rem;
-    font-weight: 700;
-    color: @color-secondary;
-  }
+#header img {
+  width: 85px;
 }
 
 /* Queries ----------------------------------------------------------------- */
